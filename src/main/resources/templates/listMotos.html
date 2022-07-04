@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="shortcut icon" href="/img/favicon.png" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>List Motos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css">
+</head>
+
+<body>
+    <form method="post" enctype="application/json">
+        <input type="text" name="modelo" placeholder="Modelo" maxlength="20" required>
+        <input type="text" name="marca" placeholder="Marca" maxlength="30" required>
+        <input type="number" name="cilindrada" placeholder="Cilindrada" maxlength="10" required>
+        <input type="text" name="cor" placeholder="Cor" maxlength="20" required>
+        <input type="text" name="placa" placeholder="Placa: XXX-0000" onkeyup=" var date = this.value;
+            if (date.match(/^([aA-zZ]){3}$/) !== null) {
+                this.value = date + '-';
+                date = this.value;
+            } else if (date.match(/-\d\d\d\d/) !== null) {
+                this.value = date;
+            }" maxlength="8">
+        <button type="submit">Enviar</button>
+    </form>
+    <div class="list">
+        <table class="container" border="1" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr height="40px" style="background-color:#363636; color:#85d162">
+                    <th align='center' width='180px'>MODELO</th>
+                    <th align='center' width='180px'>MARCA</th>
+                    <th align='center' width='180px'>COR</th>
+                    <th align='center' width='180px'>CILINDRADA</th>
+                    <th align='center' width='180px'>PLACA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="moto : ${motos}">
+                    <td height="20px"><span th:text="${moto.modelo}"></span></td>
+                    <td height="20px"><span th:text="${moto.marca}"></span></td>
+                    <td height="20px"><span th:text="${moto.cor}"></span></td>
+                    <td height="20px"><span th:text="${moto.cilindrada}"></span></td>
+                    <td><span th:text="${moto.placa}"></span></td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</body>
+
+
+</html>
